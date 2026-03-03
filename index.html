@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatiple" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <title>My Links</title>
     <style>
       * {
@@ -26,25 +31,27 @@
         max-width: 440px;
       }
 
-      /* Avatar */
-      .avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #6366f1, #a855f7);
-        margin: 0 auto 1.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        font-weight: 700;
-        color: #fff;
-        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-      }
-
+      /* Header */
       .header {
         text-align: center;
         margin-bottom: 2rem;
+      }
+
+      /* Avatar */
+      .avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        margin: 0 auto 1.2rem;
+        overflow: hidden;
+        border: 3px solid rgba(99, 102, 241, 0.6);
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       .header h1 {
@@ -53,7 +60,15 @@
         margin-bottom: 0.3rem;
       }
 
-      .header p {
+      .student-id {
+        color: #a78bfa;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.2rem;
+      }
+
+      .tagline {
         color: #94a3b8;
         font-size: 0.95rem;
       }
@@ -105,62 +120,61 @@
   </head>
   <body>
     <div class="container">
+      <!-- Header -->
       <div class="header">
-        <div class="avatar" id="avatar"></div>
-        <h1 id="name"></h1>
-        <p id="tagline"></p>
+        <div class="avatar">
+          <img src="Xerecanation/Guri.jpeg" alt="Profile photo" />
+        </div>
+        <h1>Fernando Martinez</h1>
+        <p class="student-id">RA: 25206821-2</p>
+        <p class="tagline">Estudante e Alegre</p>
       </div>
-      <div class="links" id="links"></div>
-      <p class="footer" id="footer"></p>
+
+      <!-- Links -->
+      <div class="links">
+        <a
+          class="link-card"
+          href="SiteAula\index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="title">Entrega 1</div>
+          <div class="desc"> (Colecionador)</div>
+        </a>
+
+        <a
+          class="link-card"
+          href="Aula24fev\index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="title">Entrega 2 </div>
+          <div class="desc">(Portifolio)</div>
+        </a>
+
+        <a
+          class="link-card"
+          href="EntregaHTML\index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="title">Entrega 3 </div>
+          <div class="desc">(Guia de Estudo)</div>
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <p class="footer">© 2026 XablauMaster017</p>
+      <div style="text-align: center; margin-top: 1rem;">
+       <a href="https://github.com/XablauMaster017" 
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color: #6366f1; font-size: 1.8rem">
+        <i class="fa-brands fa-github"></i></a>
+      </div>
+   
+     </p>
     </div>
-
-    <script>
-      // ===== EDIT YOUR INFO HERE =====
-      const profile = {
-        initials: "FM",
-        name: "Fernando Martinez",
-        tagline: "Estudante e Alegre",
-      };
-
-      // ===== EDIT YOUR LINKS HERE =====
-      const links = [
-        {
-          title: "Portfolio",
-          url: "https://example.com/portfolio",
-          description: "My personal portfolio site",
-        },
-        {
-          title: "Blog",
-          url: "https://example.com/blog",
-          description: "My tech blog",
-        },
-        {
-          title: "Project Alpha",
-          url: "https://example.com/project-alpha",
-          description: "A cool side project",
-        },
-      ];
-
-      // ===== Render =====
-      document.getElementById("avatar").textContent = profile.initials;
-      document.getElementById("name").textContent = profile.name;
-      document.getElementById("tagline").textContent = profile.tagline;
-      document.getElementById("footer").textContent =
-        `© ${new Date().getFullYear()} ${profile.name}`;
-
-      const linksContainer = document.getElementById("links");
-      links.forEach((link) => {
-        const a = document.createElement("a");
-        a.href = link.url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.className = "link-card";
-        a.innerHTML = `
-        <div class="title">${link.title}</div>
-        <div class="desc">${link.description}</div>
-      `;
-        linksContainer.appendChild(a);
-      });
-    </script>
+    </a>
   </body>
 </html>
