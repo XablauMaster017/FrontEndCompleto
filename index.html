@@ -1,69 +1,166 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
-    <meta charset="UTG-8" />
-    <meta http-equiv="X-UA-Compatiple" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initialscale=1.0" />
-    <title>PORTIFÓLIO - XABLAUMASTER017</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Links</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0f0c29, #1a1a2e, #16213e);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 440px;
+      }
+
+      /* Avatar */
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #a855f7);
+        margin: 0 auto 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        color: #fff;
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .header p {
+        color: #94a3b8;
+        font-size: 0.95rem;
+      }
+
+      /* Link Cards */
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .link-card {
+        display: block;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 1.1rem 1.4rem;
+        text-decoration: none;
+        transition: all 0.25s ease;
+      }
+
+      .link-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #6366f1;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+      }
+
+      .link-card .title {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .link-card .desc {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        margin-top: 0.3rem;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        color: #475569;
+        font-size: 0.8rem;
+        margin-top: 2.5rem;
+      }
+    </style>
   </head>
   <body>
-    <div class="header">
-      <header>
-        <h1>Meu portifolio</h1>
-        <p>Bienvenidos</p>
-      </header>
+    <div class="container">
+      <div class="header">
+        <div class="avatar" id="avatar"></div>
+        <h1 id="name"></h1>
+        <p id="tagline"></p>
+      </div>
+      <div class="links" id="links"></div>
+      <p class="footer" id="footer"></p>
     </div>
-    <nav>
-      <a href="#sobre" target="_self">Sobre</a>
-      <a href="#projetos" target="_self">Projetos</a>
-      <a href="#contato" target="_self">Contato</a>
-    </nav>
 
-    <div id="main">
-      <section id="sobre">
-        <h3>Sobre XablauMaster017</h3>
-        <p>
-          I am the <b>best</b> <strong> e most inteligente</strong>
-          <i>FRONTEND</i> aluno <mark> of toda street</mark>
-        </p>
-        <p>Studante of UniCesumar <sup>3 semestre</sup></p>
-      </section>
-    <section id="Projetos">
-      <h4>Desenvolvimento full stack</h4>
-      <p> Very Skilled trabalhalheitor</p>
-      <p>Link of meu Academic <a href="https://github.com/XablauMaster017" title="GitHub" target="_blank">GitHub</a></p> 
-    </section>
-      <section id="Contato">
-        <form>
-          <fieldset>
-            <legend> Envie uma mensagem ✉️</legend>
-            <label for="nome">Nome</label><br>
-            <input type="text" id="nome" name="nome"><br>
+    <script>
+      // ===== EDIT YOUR INFO HERE =====
+      const profile = {
+        initials: "FM",
+        name: "Fernando Martinez",
+        tagline: "Estudante e Alegre",
+      };
 
-             <label for="Gênero">Nome</label><br>
-              <input type="radio" id="genero" name="genero">Masculino<br>
-              <input type="radio" id="genero" name="genero">Feminino<br>
-             <label for="Interesse">Nome</label><br>
-            <input type="checkbox" >Dinheiro<br>
-            <input type="checkbox" >Viagens<br>
-            <input type="checkbox" >Jogos<br><br>
+      // ===== EDIT YOUR LINKS HERE =====
+      const links = [
+        {
+          title: "Portfolio",
+          url: "https://example.com/portfolio",
+          description: "My personal portfolio site",
+        },
+        {
+          title: "Blog",
+          url: "https://example.com/blog",
+          description: "My tech blog",
+        },
+        {
+          title: "Project Alpha",
+          url: "https://example.com/project-alpha",
+          description: "A cool side project",
+        },
+      ];
 
-            <label>Linguagem favorita</label><br>
-            <input list="linguagens" name="linguagens">
-              <datalist id="linguagens">
-                <option value="Java"></option>
-                <option value="C"></option>
-                <option value="JS"></option>
-              </datalist>
-              <input type="submit" value="enviar"><br>
-              
+      // ===== Render =====
+      document.getElementById("avatar").textContent = profile.initials;
+      document.getElementById("name").textContent = profile.name;
+      document.getElementById("tagline").textContent = profile.tagline;
+      document.getElementById("footer").textContent =
+        `© ${new Date().getFullYear()} ${profile.name}`;
 
-          </fieldset>
-        </form>
-      </section>
-  <footer>
-    <h4>Feito com muito tectec</h4>
-    <h4>🚫IA🚫</h4>
-  </footer>
+      const linksContainer = document.getElementById("links");
+      links.forEach((link) => {
+        const a = document.createElement("a");
+        a.href = link.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "link-card";
+        a.innerHTML = `
+        <div class="title">${link.title}</div>
+        <div class="desc">${link.description}</div>
+      `;
+        linksContainer.appendChild(a);
+      });
+    </script>
   </body>
 </html>
