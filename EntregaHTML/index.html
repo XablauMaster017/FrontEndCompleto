@@ -319,47 +319,36 @@
       <section>
         <h2>Exemplo — Um Programa Simples</h2>
         <p>
-          Aqui está um pequeno programa que pede dois números ao usuário e exibe
-          a soma deles.
+          Aqui está um pequeno programa que pede sete números ao usuário e exibe
+          a média deles.
         </p>
 
         <div class="code-box">
-          <div class="code-box-title">soma.cpp</div>
-          <pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
-<span class="kw">using namespace</span> <span class="tp">std</span>;
+          <div class="code-box-title">média.cpp</div>
+          <img src="Média\Codingo.png" />
+        </div>
 
-<span class="cm">// Função para somar dois números</span>
-<span class="tp">int</span> <span class="fn">somar</span>(<span class="tp">int</span> a, <span class="tp">int</span> b) {
-    <span class="kw">return</span> a + b;
-}
+        <p>Essa é a tela depois de executar e digitar os números.</p>
 
-<span class="tp">int</span> <span class="fn">main</span>() {
-    <span class="tp">int</span> x, y;
-
-    cout &lt;&lt; <span class="st">"Digite dois números: "</span>;
-    cin &gt;&gt; x &gt;&gt; y;
-
-    <span class="tp">int</span> resultado = <span class="fn">somar</span>(x, y);
-
-    cout &lt;&lt; <span class="st">"Soma = "</span> &lt;&lt; resultado &lt;&lt; endl;
-
-    <span class="kw">return</span> <span class="nm">0</span>;
-}</pre>
+        <div class="code-box">
+          <div class="code-box-title">Média.cpp</div>
+          <img src="Média\Resuntado.png" />
         </div>
 
         <div class="notes">
           <div class="note">
             <div class="note-num">1</div>
             <p>
-              <strong>#include &lt;iostream&gt;</strong> — carrega a biblioteca
-              necessária para entrada e saída de dados (cin e cout).
+              <strong>#include &lt;stdio.h&gt;</strong> — carrega a biblioteca
+              necessária para entrada e saída de dados (As outras não tem função
+              nesse código, mas eu sou exagerado).
             </p>
           </div>
           <div class="note">
             <div class="note-num">2</div>
             <p>
-              <strong>int somar(int a, int b)</strong> — uma função que recebe
-              dois inteiros e retorna a soma deles.
+              <strong>int idades</strong> — uma função que recebe os números e
+              retorna a soma para fazer a média deles.
             </p>
           </div>
           <div class="note">
@@ -372,8 +361,9 @@
           <div class="note">
             <div class="note-num">4</div>
             <p>
-              <strong>cin &gt;&gt; x &gt;&gt; y</strong> — lê dois valores
-              digitados pelo usuário no teclado.
+              <strong> float media</strong> — lê os valores digitados pelo
+              usuário no teclado e divide pela soma (int = nº inteiros, float =
+              nº decimais).
             </p>
           </div>
           <div class="note">
@@ -391,7 +381,7 @@
         <h2>O Começo</h2>
         <p>
           Siga estes passos em ordem e em breve você estará escrevendo programas
-          de verdade.
+          de verdade. Ou não
         </p>
         <div class="steps">
           <div class="step">
@@ -403,7 +393,8 @@
               <h3>1. Instale um Compilador</h3>
               <p>
                 Baixe o GCC (MinGW no Windows) ou use um compilador online como
-                o onlinegdb.com para rodar código sem instalar nada.
+                o onlinegdb.com para rodar código sem instalar nada. (Usei
+                DevC++ mas não recomendo :)
               </p>
             </div>
           </div>
@@ -416,7 +407,7 @@
               <h3>2. Escreva o "Hello World"</h3>
               <p>
                 Comece com o programa mais simples possível. Certifique-se de
-                compilar e executar antes de avançar.
+                compilar e executar antes de avançar. Pode brincar a vontade.
               </p>
             </div>
           </div>
@@ -452,16 +443,13 @@
               <h3>5. Crie um Pequeno Projeto</h3>
               <p>
                 Una tudo em um programa — uma calculadora, um jogo de adivinhar
-                número ou uma calculadora de média escolar.
+                número ou uma calculadora de média escolar. Se compilar já vai
+                ser uma vitoria
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      <footer>
-        <p>C++ Básico — Trabalho Escolar &nbsp;·&nbsp; Feito com HTML e CSS</p>
-      </footer>
     </div>
   </body>
 </html>
