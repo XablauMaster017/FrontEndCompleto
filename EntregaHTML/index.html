@@ -26,7 +26,6 @@
         padding: 40px 24px 80px;
       }
 
-      /* --- CABEÇALHO --- */
       header {
         text-align: center;
         padding: 60px 0 50px;
@@ -51,7 +50,6 @@
         margin: 0 auto;
       }
 
-      /* --- SEÇÕES --- */
       section {
         margin-bottom: 56px;
       }
@@ -69,7 +67,6 @@
         margin-bottom: 14px;
       }
 
-      /* --- LISTA DE TÓPICOS --- */
       .topic-list {
         list-style: none;
         display: flex;
@@ -106,13 +103,17 @@
         font-size: 0.9rem;
       }
 
-      /* --- BLOCO DE CÓDIGO --- */
       .code-box {
-        background: #0d0d0d;
+        background-color: transparent;
         border: 1px solid #3a3a3a;
         border-radius: 6px;
         overflow: hidden;
         margin-top: 14px;
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+
       }
 
       .code-box-title {
@@ -151,7 +152,6 @@
         color: #b5cea8;
       }
 
-      /* --- ANOTAÇÕES --- */
       .notes {
         margin-top: 18px;
         display: flex;
@@ -189,7 +189,6 @@
         color: #ccc;
       }
 
-      /* --- ROTEIRO --- */
       .steps {
         display: flex;
         flex-direction: column;
@@ -242,15 +241,6 @@
         font-size: 0.9rem;
       }
 
-      /* --- RODAPÉ --- */
-      footer {
-        margin-top: 60px;
-        border-top: 1px solid #3a3a3a;
-        padding-top: 24px;
-        text-align: center;
-        color: #555;
-        font-size: 0.82rem;
-      }
     </style>
   </head>
   <body>
@@ -260,7 +250,6 @@
         <p>O minimo para não passar vergonha codando em C++</p>
       </header>
 
-      <!-- TÓPICOS -->
       <section>
         <h2>O que você vai ver aqui</h2>
         <p>Esta página cobre os tópicos essenciais para começar seu estudo</p>
@@ -315,7 +304,6 @@
         </ul>
       </section>
 
-      <!-- EXEMPLO DE CÓDIGO -->
       <section>
         <h2>Exemplo — Um Programa Simples</h2>
         <p>
@@ -325,14 +313,14 @@
 
         <div class="code-box">
           <div class="code-box-title">média.cpp</div>
-          <img src="Média\Codingo.png" />
+          <img src="Média\Codingo.png" width="700" />
         </div>
-
-        <p>Essa é a tela depois de executar e digitar os números.</p>
+        
+        <h3>Essa é a tela depois de executar e digitar os números.</h3>
 
         <div class="code-box">
           <div class="code-box-title">Média.cpp</div>
-          <img src="Média\Resuntado.png" />
+          <img src="Média\Resuntado.png" width="700" />
         </div>
 
         <div class="notes">
@@ -376,7 +364,6 @@
         </div>
       </section>
 
-      <!-- ROTEIRO -->
       <section>
         <h2>O Começo</h2>
         <p>
@@ -444,12 +431,19 @@
               <p>
                 Una tudo em um programa — uma calculadora, um jogo de adivinhar
                 número ou uma calculadora de média escolar. Se compilar já vai
-                ser uma vitoria
+                ser uma vitoria.
               </p>
             </div>
           </div>
         </div>
+        <p></p>
+        <p><h4>O proximo passo é continuar tentando fazer coisas interessantes,
+          errando e tentando de novo.</h4>
+          Se você sabe fazer o básico bem feito em C++, já pode se chamar de
+          programador.
+        </p>
       </section>
+      <h6>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </h6>
     </div>
   </body>
 </html>
