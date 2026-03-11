@@ -6,6 +6,196 @@
     <meta name="author" content="Portal Computação">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arquivo Confuso da Computação</title>
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333333;
+        }
+
+        h1 {
+            color: #0000cc;
+            text-align: center;
+        }
+
+        h2 {
+            color: #006600;
+            border-bottom: 2px solid #006600;
+        }
+
+        h3 {
+            color: #333333;
+        }
+
+        header {
+            background-color: #ccccff;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #9999cc;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            background-color: #dddddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #aaaaaa;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: #0000cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        article {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        aside {
+            background-color: #ffffcc;
+            border: 1px solid #cccc00;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        blockquote {
+            border-left: 4px solid #999999;
+            padding-left: 15px;
+            color: #555555;
+            font-style: italic;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: #336699;
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+
+        td {
+            padding: 8px;
+            border: 1px solid #cccccc;
+        }
+
+        tr:nth-child(even) {
+            background-color: #eeeeee;
+        }
+
+        pre {
+            background-color: #333333;
+            color: #00ff00;
+            padding: 10px;
+            font-family: "Courier New", monospace;
+        }
+
+        code {
+            background-color: #eeeeee;
+            padding: 2px 5px;
+            font-family: "Courier New", monospace;
+            color: #cc0000;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #aaaaaa;
+        }
+
+        input[type="submit"] {
+            background-color: #336699;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #224477;
+        }
+
+        fieldset {
+            border: 1px solid #aaaaaa;
+            padding: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #336699;
+        }
+
+        label {
+            display: block;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #333333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+            border-top: 3px solid #336699;
+        }
+
+        footer address {
+            color: #aaaaaa;
+            font-style: normal;
+        }
+
+        details {
+            margin-top: 8px;
+            padding: 5px;
+            background-color: #eeeeee;
+            border: 1px solid #cccccc;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #0000cc;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -203,7 +393,7 @@ I'M THE CREEPER : CATCH ME IF YOU CAN
         <p>
             A tecnologia foi nomeada em homenagem ao rei 
             <em>Harald "Bluetooth" Gormsson</em>, que unificou a Dinamarca.
-            A ideia era “unificar dispositivos”.
+            A ideia era "unificar dispositivos".
         </p>
     </article>
 
@@ -538,37 +728,38 @@ CON CON
     </form>
     
 </section>
- <section id="formulario">
-            <h2>Envie sua Curiosidade</h2>
 
-            <form>
-                <fieldset>
-                    <legend>Informações</legend>
+<section id="formulario">
+    <h2>Envie sua Curiosidade</h2>
 
-                    <label>Nome:</label>
-                    <input type="text" name="nome">
+    <form>
+        <fieldset>
+            <legend>Informações</legend>
 
-                    <label>Email:</label>
-                    <input type="email" name="email">
+            <label>Nome:</label>
+            <input type="text" name="nome">
 
-                    <label>Categoria:</label>
-                    <select name="categoria">
-                        <option>Pioneiros</option>
-                        <option>Bugs</option>
-                        <option>Internet</option>
-                        <option>Linguagens</option>
-                    </select>
+            <label>Email:</label>
+            <input type="email" name="email">
 
-                    <label>Data do fato:</label>
-                    <input type="date" name="data">
+            <label>Categoria:</label>
+            <select name="categoria">
+                <option>Pioneiros</option>
+                <option>Bugs</option>
+                <option>Internet</option>
+                <option>Linguagens</option>
+            </select>
 
-                    <label>Sua curiosidade:</label>
-                    <textarea name="curiosidade"></textarea>
+            <label>Data do fato:</label>
+            <input type="date" name="data">
 
-                    <input type="submit" value="Enviar">
-                </fieldset>
-            </form>
-        </section>
+            <label>Sua curiosidade:</label>
+            <textarea name="curiosidade"></textarea>
+
+            <input type="submit" value="Enviar">
+        </fieldset>
+    </form>
+</section>
 
     
 <section id="formulario-secreto">
@@ -603,19 +794,15 @@ CON CON
 
 
 </main>
-</body>
+
 <footer>
     <p>© 2026 Instituto Internacional de Informações Desnecessárias</p>
     <address>Email: inutilidades@caosdigital.com</address>
-      <p>&copy; 2026 Arquivo Confuso da Computação</p>
-        <address>
-            Contato: contato@computacao.com
-        </address>
-         <p>© 2026 Arquivo Ultra-Secreto da Computação</p>
+    <p>&copy; 2026 Arquivo Confuso da Computação</p>
+    <address>Contato: contato@computacao.com</address>
+    <p>© 2026 Arquivo Ultra-Secreto da Computação</p>
     <address>contato@ultrasecreto.dev</address>
 </footer>
-
-</div>
 
 </body>
 </html>
