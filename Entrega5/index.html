@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="cupcake">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fofinho Virtual</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+      .bg-dia {
+        background:
+          radial-gradient(ellipse at 15% 20%, #ffe066 0%, transparent 35%),
+          linear-gradient(
+            180deg,
+            #87ceeb 0%,
+            #b8e4f9 40%,
+            #d4f5c4 65%,
+            #7ec850 100%
+          );
+      }
+      .bg-noite {
+        background:
+          radial-gradient(ellipse at 75% 15%, #fffbe6 0%, transparent 12%),
+          linear-gradient(
+            180deg,
+            #0a0a2e 0%,
+            #1a1a4e 40%,
+            #2d1b5e 65%,
+            #1a0a2e 100%
+          );
+      }
+
+      body {
+        min-height: 100vh;
+        transition: background 2s ease;
+      }
+
+      .cloud {
+        position: fixed;
+        top: 12%;
+        width: 120px;
+        height: 45px;
+        background: white;
+        border-radius: 50px;
+        opacity: 0.8;
+        pointer-events: none;
+        z-index: 0;
+        animation: drift var(--speed, 30s) linear infinite;
+        animation-delay: var(--delay, 0s);
+      }
+      .cloud::before,
+      .cloud::after {
+        content: "";
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+      }
+      .cloud::before {
+        width: 60px;
+        height: 60px;
+        top: -25px;
+        left: 20px;
+      }
+      .cloud::after {
+        width: 45px;
+        height: 45px;
+        top: -18px;
+        left: 50px;
+      }
+      @keyframes drift {
+        from {
+          transform: translateX(-160px);
+        }
+        to {
+          transform: translateX(110vw);
+        }
+      }
+      .clouds-wrap {
+        transition: opacity 1.5s ease;
+      }
+      .clouds-wrap.hidden-clouds {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #stars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+        transition: opacity 1.5s ease;
+      }
+      #stars.visible {
+        opacity: 1;
+      }
+      .star {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle var(--dur, 2s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+      .ground {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.15));
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      @keyframes bounce-soft {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-8px);
+        }
+        40% {
+          transform: translateX(8px);
+        }
+        60% {
+          transform: translateX(-6px);
+        }
+        80% {
+          transform: translateX(6px);
+        }
+      }
+      #mainImage {
+        animation: bounce-soft 2.6s ease-in-out infinite;
+      }
+      #mainImage.hungry {
+        animation: shake 0.5s ease-in-out infinite;
+      }
+
+      .bar-inner {
+        transition: width 0.5s ease;
+      }
+    </style>
+  </head>
+
+  <body class="bg-dia flex flex-col">
+    <div class="clouds-wrap" id="cloudsWrap">
+      <div class="cloud" style="--speed: 28s; --delay: 0s; top: 8%"></div>
+      <div
+        class="cloud"
+        style="--speed: 40s; --delay: -12s; top: 18%; width: 90px"
+      ></div>
+      <div
+        class="cloud"
+        style="--speed: 34s; --delay: -6s; top: 5%; width: 150px; opacity: 0.6"
+      ></div>
+    </div>
+    <div id="stars"></div>
+    <div class="ground"></div>
+    <div
+      class="relative z-10 w-full flex items-center justify-between p-4 gap-4 bg-white/30 backdrop-blur-sm"
+    >
+      <div class="flex items-center gap-3">
+        <div class="avatar">
+          <div
+            class="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 shadow-md"
+          >
+            <img id="avatarImg" src="Arombadinhos/comendo.webp" alt="Avatar" />
+          </div>
+        </div>
+        <input
+          id="nomeInput"
+          type="text"
+          placeholder="Nome da criatura..."
+          class="input input-bordered input-secondary input-sm w-40 sm:w-52 bg-white/70"
+          oninput="atualizarNome()"
+        />
+      </div>
+      <div class="flex flex-col items-end gap-1 text-xs font-semibold">
+        <div class="flex items-center gap-2">
+          <span class="text-orange-600">Fome</span>
+          <div
+            class="w-28 h-3 rounded-full bg-white/50 overflow-hidden border border-orange-300"
+          >
+            <div
+              id="barFome"
+              class="bar-inner h-full bg-orange-400 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-pink-600">Humor</span>
+          <div
+            class="w-28 h-3 rounded-full bg-white/50 overflow-hidden border border-pink-300"
+          >
+            <div
+              id="barHumor"
+              class="bar-inner h-full bg-pink-400 rounded-full"
+              style="width: 100%"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="relative z-10 flex flex-col items-center justify-center flex-1 px-4 py-6 gap-6"
+    >
+      <div
+        id="statusBadge"
+        class="badge badge-success badge-lg text-base font-bold shadow px-4 py-3"
+      >
+        😊 Feliz
+      </div>
+
+      <img
+        id="mainImage"
+        src="Arombadinhos/normalido.webp"
+        alt="Bichinho Virtual"
+        class="w-full max-w-xs h-auto drop-shadow-2xl select-none"
+      />
+
+      <p
+        id="nomeDisplay"
+        class="text-2xl font-extrabold text-white drop-shadow-lg tracking-wide hidden"
+      ></p>
+
+      <button
+        class="btn btn-primary btn-lg gap-2 shadow-xl active:scale-95 transition-transform"
+        onclick="alimentar()"
+      >
+        <img
+          src="Arombadinhos/uva.webp"
+          alt="uva"
+          class="w-7 h-7 object-contain"
+        />
+        Alimentar
+      </button>
+    </div>
+
+    <div
+      class="relative z-10 w-full flex items-center justify-center gap-6 p-4 bg-white/30 backdrop-blur-sm"
+    >
+      <label
+        class="flex items-center gap-2 text-sm font-semibold cursor-pointer select-none"
+      >
+        <span class="text-yellow-500 text-lg">☀️</span>
+        <input
+          type="checkbox"
+          id="toggleNoite"
+          class="toggle toggle-primary"
+          onchange="alternarFundoManual()"
+        />
+        <span class="text-indigo-300 text-lg">🌙</span>
+      </label>
+
+      <!-- Reset -->
+      <button class="btn btn-sm btn-outline btn-error" onclick="resetarJogo()">
+        🔄 Reiniciar
+      </button>
+
+      <button
+        id="easterEgg"
+        class="opacity-30 w-2 h-2 overflow-hidden absolute bottom-1 right-1"
+        onclick="mostrarFerlini()"
+      ></button>
+    </div>
+
+    <dialog id="ferliniModal" class="modal">
+      <div class="modal-box text-center">
+        <img
+          src="Arombadinhos/1gostosinho.jpeg"
+          alt="Ferlini"
+          onerror="this.style.display = 'none'"
+          class="mx-auto rounded-xl max-h-60 object-cover shadow-lg"
+        />
+        <p class="mt-3 text-sm text-gray-500">Gostosinho😎</p>
+        <div class="modal-action justify-center">
+          <form method="dialog">
+            <button class="btn btn-primary">Fechar</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
