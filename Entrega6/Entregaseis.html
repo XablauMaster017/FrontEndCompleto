@@ -18,37 +18,48 @@
         font-weight: bold;
         border: 4px solid #000ead;
       }
-      .painel{
+      .painel {
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 4px solid #5f00ad;
+      }
+      .xerecanation{
         background: #fff;
         padding: 10px;
         margin-bottom: 10px;
         border: 4px solid #5f00ad;
 
       }
-
-  </style>
+    </style>
   </head>
   <body class="bg-primary bg-gradient">
-     
-      <div class="conteiner mt-3"></div>
-      <div class="topo"> <b>CAIXA LIVRE</b></div>
-      <div class="row mt-3">
-        <div class="col-md-5">
-          <h3 class="text-white"><span class="badge text-bg-primary">Sua compra</span></h3>
-          <ul id="lista" class="list-group lista"></ul>
-
-        </div>
-          <div class="col-md-7">
-            <div class="painel total">
-              <span id="total" style="text-color: #000ead;">0,00</span>
-            </div>
-          </div>
+    <div class="conteiner mt-3"></div>
+    <div class="topo"><b>CAIXA LIVRE</b></div>
+    <div class="row mt-3">
+      <div class="col-md-5">
+        <h3 class="text-white">
+          <span class="badge text-bg-primary">Sua compra</span>
+        </h3>
+        <ul id="lista" class="list-group lista"></ul>
       </div>
+      <div class="col-md-7">
+        <div class="painel total">
+          <span id="total" style="text-emphasis-color: #000ead">0,00</span>
+        </div>
+        <div class="painel">
+          <label> Código de Barras: </label>
+          <input type="number" id="cod" class="from-control">
+        </div>
 
+        <div class="painel">
+          <label> Quantidade: </label>
+          <input type="number" id="qtd" class="from-control">
+        </div>
+        <button class="btn btn-success w-100" onclick="addProduto()">Adicionar produto</button>
+        
+        </div>
+      </div>
     </div>
-
-
-
-
   </body>
 </html>
