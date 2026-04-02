@@ -25,6 +25,23 @@ function addProduto() {
     return;
   }
 
+  function atualizaTela();{
+    let total = 0;
+
+    cont lista = document.getElementById("lista"); 
+
+    carrinho.forEach((item, index) => {
+      total += item.subtot;
+
+      const li = document.createElement("li");
+      li.className = "list-group-item"
+      li.innerHTML = `<div> ${item.nome} ----
+      ${item.quantidade} X ${item.preco} = ${item.subtot} </div>`;
+
+      lista.appendChild(li);
+    })
+  }
+
   const produtoBase = produtos[codValue];
 
   const item = {
@@ -37,4 +54,6 @@ function addProduto() {
   carrinho.push(item);
   audio.currentTime = 0;
   audio.play();
+
+  
 }
