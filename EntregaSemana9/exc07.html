@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 07 — Validador de Segurança Infinity</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --bg-alt: #0a0c12;
+            --surface: #171923;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --text: #e4e6eb;
+            --text-dim: #9ca3af;
+            --text-faint: #6b7280;
+            --accent: #7c5cff;
+            --accent-hover: #6b4fea;
+            --accent-glow: rgba(124, 92, 255, 0.28);
+            --success: #34d399;
+            --success-bg: rgba(52, 211, 153, 0.10);
+            --success-border: rgba(52, 211, 153, 0.32);
+            --danger: #f87171;
+            --danger-bg: rgba(248, 113, 113, 0.10);
+            --danger-border: rgba(248, 113, 113, 0.32);
+            --radius: 14px;
+            --radius-sm: 9px;
+            --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 92, 255, 0.12) 0%, transparent 60%),
+                var(--bg);
+            color: var(--text);
+            padding: 28px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav {
+            width: 100%;
+            max-width: 560px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 13px;
+        }
+
+        .nav a, .nav span.disabled {
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+        }
+
+        .nav span.disabled { opacity: 0.35; cursor: not-allowed; }
+        .nav-arrows { display: flex; gap: 8px; }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.04) inset,
+                0 30px 60px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 13px 18px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .dot { width: 11px; height: 11px; border-radius: 50%; }
+        .dot:nth-child(1) { background: #ff5f57; }
+        .dot:nth-child(2) { background: #febc2e; }
+        .dot:nth-child(3) { background: #28c840; }
+
+        .badge {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .card-body { padding: 30px 32px 32px; }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 4px;
+        }
+
+        .subtitle { font-size: 13px; color: var(--text-dim); }
+
+        .divider-line {
+            width: 38px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 2px;
+            margin: 14px 0 28px;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-faint);
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 14px;
+            background: var(--bg-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+        }
+
+        input::placeholder { color: var(--text-faint); letter-spacing: normal; }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        button {
+            padding: 12px 22px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px -6px var(--accent-glow);
+        }
+
+        button:active { transform: translateY(0); }
+
+        .status-banner {
+            margin-top: 22px;
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid;
+            animation: fadeIn 240ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .status-banner.valid {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success-border);
+        }
+
+        .status-banner.invalid {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border-color: var(--danger-border);
+        }
+
+        .info-panel {
+            margin-top: 14px;
+            padding: 6px 20px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            animation: fadeIn 240ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--border);
+            font-size: 13px;
+        }
+
+        .info-row:last-child { border-bottom: none; }
+
+        .info-row span:first-child {
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        .info-row span:last-child {
+            color: var(--text);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .hidden { display: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="00-instrucoes.html">← Instruções</a>
+        <div class="nav-arrows">
+            <a href="exc06.html">◀ Anterior</a>
+            <span class="disabled">Próximo ▶</span>
+        </div>
+    </nav>
+
+    <main class="card">
+        <div class="card-header">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="badge">Exercício 07</span>
+        </div>
+
+        <div class="card-body">
+            <h1>Validador de Segurança Infinity</h1>
+            <p class="subtitle">Card Guard — validação por Algoritmo de Luhn e leitura de IIN/BIN.</p>
+            <div class="divider-line"></div>
+
+            <label for="cardInput">Número do Cartão</label>
+            <div class="form-group">
+                <input type="text" id="cardInput" placeholder="0000 0000 0000 0000" inputmode="numeric" autocomplete="off">
+                <button id="analyzeBtn">Analisar Cartão</button>
+            </div>
+
+            <div id="statusBanner" class="status-banner hidden"></div>
+
+            <div id="infoPanel" class="info-panel hidden">
+                <div class="info-row">
+                    <span>Bandeira</span>
+                    <span id="brandInfo">—</span>
+                </div>
+                <div class="info-row">
+                    <span>Categoria de Setor (1º dígito)</span>
+                    <span id="industryInfo">—</span>
+                </div>
+                <div class="info-row">
+                    <span>Banco Emissor (IIN)</span>
+                    <span id="issuerInfo">—</span>
+                </div>
+                <div class="info-row">
+                    <span>Dígitos analisados</span>
+                    <span id="lengthInfo">—</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ============================================================
+        // 1. ALGORITMO DE LUHN  — valida a integridade matemática
+        // ============================================================
+        function luhnCheck(number) {
+            let sum = 0;
+            let double = false; // controla quais dígitos serão dobrados
+
+            // Percorre os dígitos da DIREITA para a ESQUERDA
+            for (let i = number.length - 1; i >= 0; i--) {
+                let digit = parseInt(number[i], 10);
+
+                if (double) {
+                    digit = digit * 2;          // dobra o dígito
+                    if (digit > 9) digit -= 9;  // se passar de 9, subtrai 9
+                }
+
+                sum += digit;
+                double = !double; // alterna: dobra sim, dobra não, dobra sim...
+            }
+
+            // Se a soma é múltipla de 10, o número é válido
+            return sum % 10 === 0;
+        }
+
+        // ============================================================
+        // 2. DETECÇÃO DA BANDEIRA — baseada nos dígitos iniciais
+        // ============================================================
+        function detectBrand(number) {
+            if (/^4/.test(number)) return 'Visa';
+            if (/^(5[1-5]|2[2-7])/.test(number)) return 'Mastercard';
+            if (/^3[47]/.test(number)) return 'American Express';
+            if (/^(6011|65|64[4-9])/.test(number)) return 'Discover';
+            if (/^(36|38|30[0-5])/.test(number)) return 'Diners Club';
+            if (/^(4011|4312|4389|5041|6362|6363|650|651)/.test(number)) return 'Elo';
+            if (/^(606282|3841)/.test(number)) return 'Hipercard';
+            return 'Desconhecida';
+        }
+
+        // ============================================================
+        // 3. CATEGORIA DE SETOR — definida pelo 1º dígito (MII)
+        // ============================================================
+        function detectIndustry(firstDigit) {
+            const table = {
+                '0': 'ISO/TC 68 e outras indústrias',
+                '1': 'Companhias aéreas',
+                '2': 'Companhias aéreas e setor financeiro',
+                '3': 'Viagens e entretenimento',
+                '4': 'Bancário e financeiro',
+                '5': 'Bancário e financeiro',
+                '6': 'Comércio e bancário',
+                '7': 'Petróleo e outras indústrias',
+                '8': 'Saúde e telecomunicações',
+                '9': 'Atribuição nacional'
+            };
+            return table[firstDigit] || 'Não identificada';
+        }
+
+        // ============================================================
+        // 4. BANCO EMISSOR — consulta simplificada por prefixo IIN/BIN
+        //    (em produção isso viria de uma base de dados real de BINs)
+        // ============================================================
+        function detectIssuer(number) {
+            const bins = {
+                '431274': 'Banco do Brasil',
+                '516292': 'Itaú Unibanco',
+                '522498': 'Bradesco',
+                '548129': 'Santander',
+                '627780': 'Nubank',
+                '650516': 'Caixa Econômica Federal',
+                '453211': 'Infinity Bank'
+            };
+            const bin = number.slice(0, 6);
+            return bins[bin] || 'Emissor não catalogado (consulta BIN necessária)';
+        }
+
+        // ============================================================
+        // 5. EVENTO PRINCIPAL — junta tudo ao clicar no botão
+        // ============================================================
+        document.getElementById('analyzeBtn').addEventListener('click', function () {
+            const raw = document.getElementById('cardInput').value;
+
+            // Remove espaços, pontos e qualquer caractere que não seja dígito
+            const number = raw.replace(/\D/g, '');
+
+            const statusBanner = document.getElementById('statusBanner');
+            const infoPanel = document.getElementById('infoPanel');
+
+            // --- Validação de tamanho: cartões têm de 13 a 16 dígitos ---
+            if (number.length < 13 || number.length > 16) {
+                statusBanner.className = 'status-banner invalid';
+                statusBanner.textContent = '✗ Número inválido — informe entre 13 e 16 dígitos.';
+                infoPanel.classList.add('hidden');
+                return;
+            }
+
+            // --- Roda o Algoritmo de Luhn ---
+            const isValid = luhnCheck(number);
+
+            // --- Atualiza o banner de status ---
+            if (isValid) {
+                statusBanner.className = 'status-banner valid';
+                statusBanner.textContent = '✓ Cartão VÁLIDO — passou na verificação de Luhn.';
+            } else {
+                statusBanner.className = 'status-banner invalid';
+                statusBanner.textContent = '✗ Cartão INVÁLIDO — falhou na verificação de Luhn.';
+            }
+
+            // --- Preenche o Painel de Info (mesmo que inválido, mostramos a origem) ---
+            document.getElementById('brandInfo').textContent = detectBrand(number);
+            document.getElementById('industryInfo').textContent = detectIndustry(number[0]);
+            document.getElementById('issuerInfo').textContent = detectIssuer(number);
+            document.getElementById('lengthInfo').textContent = number.length + ' dígitos';
+
+            infoPanel.classList.remove('hidden');
+        });
+
+        // Permite analisar pressionando Enter
+        document.getElementById('cardInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') document.getElementById('analyzeBtn').click();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 01 — Validador de CPF</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --bg-alt: #0a0c12;
+            --surface: #171923;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --text: #e4e6eb;
+            --text-dim: #9ca3af;
+            --text-faint: #6b7280;
+            --accent: #7c5cff;
+            --accent-hover: #6b4fea;
+            --accent-glow: rgba(124, 92, 255, 0.28);
+            --success: #34d399;
+            --success-bg: rgba(52, 211, 153, 0.10);
+            --success-border: rgba(52, 211, 153, 0.32);
+            --danger: #f87171;
+            --danger-bg: rgba(248, 113, 113, 0.10);
+            --danger-border: rgba(248, 113, 113, 0.32);
+            --radius: 14px;
+            --radius-sm: 9px;
+            --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 92, 255, 0.12) 0%, transparent 60%),
+                var(--bg);
+            color: var(--text);
+            padding: 28px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav {
+            width: 100%;
+            max-width: 560px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 13px;
+        }
+
+        .nav a, .nav span.disabled {
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+        }
+
+        .nav span.disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .nav-arrows { display: flex; gap: 8px; }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.04) inset,
+                0 30px 60px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 13px 18px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .dot:nth-child(1) { background: #ff5f57; }
+        .dot:nth-child(2) { background: #febc2e; }
+        .dot:nth-child(3) { background: #28c840; }
+
+        .badge {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .card-body { padding: 30px 32px 32px; }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .divider-line {
+            width: 38px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 2px;
+            margin: 14px 0 28px;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-faint);
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 14px;
+            background: var(--bg-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        input::placeholder { color: var(--text-faint); }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        button {
+            padding: 12px 22px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px -6px var(--accent-glow);
+        }
+
+        button:active { transform: translateY(0); }
+
+        .result {
+            margin-top: 22px;
+            padding: 16px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid;
+            animation: fadeIn 240ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .result.hidden { display: none; }
+
+        .result.valid {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success-border);
+        }
+
+        .result.invalid {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border-color: var(--danger-border);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="00-instrucoes.html">← Instruções</a>
+        <div class="nav-arrows">
+            <span class="disabled">◀ Anterior</span>
+            <a href="exc02.html">Próximo ▶</a>
+        </div>
+    </nav>
+
+    <main class="card">
+        <div class="card-header">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="badge">Exercício 01</span>
+        </div>
+
+        <div class="card-body">
+            <h1>Validador de CPF</h1>
+            <p class="subtitle">Verifique se o documento informado é válido.</p>
+            <div class="divider-line"></div>
+
+            <label for="cpfInput">CPF</label>
+            <div class="form-group">
+                <input type="text" id="cpfInput" placeholder="123.456.789-00" autocomplete="off">
+                <button id="validateBtn">Validar</button>
+            </div>
+
+            <div id="result" class="result hidden">
+                <p id="resultText"></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function validateCPF(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+
+            if (cpf.length !== 11) return false;
+            if (/^(\d)\1{10}$/.test(cpf)) return false;
+
+            let sum = 0;
+            let multiplier = 10;
+            for (let i = 0; i < 9; i++) {
+                sum += parseInt(cpf[i]) * multiplier;
+                multiplier--;
+            }
+            let remainder = (sum * 10) % 11;
+            let firstDigit = remainder === 10 ? 0 : remainder;
+            if (parseInt(cpf[9]) !== firstDigit) return false;
+
+            sum = 0;
+            multiplier = 11;
+            for (let i = 0; i < 10; i++) {
+                sum += parseInt(cpf[i]) * multiplier;
+                multiplier--;
+            }
+            remainder = (sum * 10) % 11;
+            let secondDigit = remainder === 10 ? 0 : remainder;
+            if (parseInt(cpf[10]) !== secondDigit) return false;
+
+            return true;
+        }
+
+        document.getElementById('validateBtn').addEventListener('click', function () {
+            const cpfInput = document.getElementById('cpfInput');
+            const result = document.getElementById('result');
+            const resultText = document.getElementById('resultText');
+
+            const cpf = cpfInput.value.trim();
+
+            if (!cpf) {
+                resultText.textContent = 'Digite um CPF para validar.';
+                result.classList.remove('hidden', 'valid', 'invalid');
+                result.classList.add('invalid');
+                return;
+            }
+
+            const isValid = validateCPF(cpf);
+            result.classList.remove('hidden', 'valid', 'invalid');
+
+            if (isValid) {
+                resultText.textContent = '✓ CPF Válido';
+                result.classList.add('valid');
+            } else {
+                resultText.textContent = '✗ CPF Inválido';
+                result.classList.add('invalid');
+            }
+        });
+
+        document.getElementById('cpfInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                document.getElementById('validateBtn').click();
+            }
+        });
+    </script>
+</body>
+</html>

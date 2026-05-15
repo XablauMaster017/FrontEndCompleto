@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 03 — Média Escolar</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --bg-alt: #0a0c12;
+            --surface: #171923;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --text: #e4e6eb;
+            --text-dim: #9ca3af;
+            --text-faint: #6b7280;
+            --accent: #7c5cff;
+            --accent-hover: #6b4fea;
+            --accent-glow: rgba(124, 92, 255, 0.28);
+            --aprovado: #60a5fa;
+            --aprovado-bg: rgba(96, 165, 250, 0.10);
+            --aprovado-border: rgba(96, 165, 250, 0.32);
+            --exame: #fbbf24;
+            --exame-bg: rgba(251, 191, 36, 0.10);
+            --exame-border: rgba(251, 191, 36, 0.32);
+            --reprovado: #f87171;
+            --reprovado-bg: rgba(248, 113, 113, 0.10);
+            --reprovado-border: rgba(248, 113, 113, 0.32);
+            --radius: 14px;
+            --radius-sm: 9px;
+            --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 92, 255, 0.12) 0%, transparent 60%),
+                var(--bg);
+            color: var(--text);
+            padding: 28px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav {
+            width: 100%;
+            max-width: 560px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 13px;
+        }
+
+        .nav a, .nav span.disabled {
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+        }
+
+        .nav span.disabled { opacity: 0.35; cursor: not-allowed; }
+        .nav-arrows { display: flex; gap: 8px; }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.04) inset,
+                0 30px 60px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 13px 18px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .dot { width: 11px; height: 11px; border-radius: 50%; }
+        .dot:nth-child(1) { background: #ff5f57; }
+        .dot:nth-child(2) { background: #febc2e; }
+        .dot:nth-child(3) { background: #28c840; }
+
+        .badge {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .card-body { padding: 30px 32px 32px; }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 4px;
+        }
+
+        .subtitle { font-size: 13px; color: var(--text-dim); }
+
+        .divider-line {
+            width: 38px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 2px;
+            margin: 14px 0 28px;
+        }
+
+        .field { margin-bottom: 18px; }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-faint);
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--bg-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        input::placeholder { color: var(--text-faint); }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .grades-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .grades-container .field { margin-bottom: 0; }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+            margin-top: 22px;
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px -6px var(--accent-glow);
+        }
+
+        button:active { transform: translateY(0); }
+
+        .result {
+            margin-top: 22px;
+            padding: 18px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid;
+            animation: fadeIn 240ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .result.hidden { display: none; }
+
+        .result.aprovado {
+            background: var(--aprovado-bg);
+            border-color: var(--aprovado-border);
+        }
+        .result.aprovado .status-info,
+        .result.aprovado .student-info,
+        .result.aprovado .average-info { color: var(--aprovado); }
+
+        .result.exame {
+            background: var(--exame-bg);
+            border-color: var(--exame-border);
+        }
+        .result.exame .status-info,
+        .result.exame .student-info,
+        .result.exame .average-info { color: var(--exame); }
+
+        .result.reprovado {
+            background: var(--reprovado-bg);
+            border-color: var(--reprovado-border);
+        }
+        .result.reprovado .status-info,
+        .result.reprovado .student-info,
+        .result.reprovado .average-info { color: var(--reprovado); }
+
+        .student-info {
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.85;
+            margin-bottom: 6px;
+        }
+
+        .average-info {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .status-info {
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="00-instrucoes.html">← Instruções</a>
+        <div class="nav-arrows">
+            <a href="exc02.html">◀ Anterior</a>
+            <a href="exc04.html">Próximo ▶</a>
+        </div>
+    </nav>
+
+    <main class="card">
+        <div class="card-header">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="badge">Exercício 03</span>
+        </div>
+
+        <div class="card-body">
+            <h1>Calculadora de Média</h1>
+            <p class="subtitle">Verifique a situação do aluno a partir de três notas.</p>
+            <div class="divider-line"></div>
+
+            <div class="field">
+                <label for="studentName">Nome do Aluno</label>
+                <input type="text" id="studentName" placeholder="Digite o nome">
+            </div>
+
+            <div class="grades-container">
+                <div class="field">
+                    <label for="grade1">Nota 1</label>
+                    <input type="number" id="grade1" min="0" max="10" step="0.1" placeholder="0">
+                </div>
+                <div class="field">
+                    <label for="grade2">Nota 2</label>
+                    <input type="number" id="grade2" min="0" max="10" step="0.1" placeholder="0">
+                </div>
+                <div class="field">
+                    <label for="grade3">Nota 3</label>
+                    <input type="number" id="grade3" min="0" max="10" step="0.1" placeholder="0">
+                </div>
+            </div>
+
+            <button id="calculateBtn">Calcular Média</button>
+
+            <div id="result" class="result hidden">
+                <p id="studentInfo" class="student-info"></p>
+                <p id="averageInfo" class="average-info"></p>
+                <p id="statusInfo" class="status-info"></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function () {
+            const studentName = document.getElementById('studentName').value.trim();
+            const grade1 = Number(document.getElementById('grade1').value);
+            const grade2 = Number(document.getElementById('grade2').value);
+            const grade3 = Number(document.getElementById('grade3').value);
+
+            const result = document.getElementById('result');
+            const studentInfo = document.getElementById('studentInfo');
+            const averageInfo = document.getElementById('averageInfo');
+            const statusInfo = document.getElementById('statusInfo');
+
+            if (!studentName) {
+                alert('Digite o nome do aluno');
+                return;
+            }
+            if (isNaN(grade1) || isNaN(grade2) ||
+                isNaN(grade3) ||
+                document.getElementById('grade1').value === '' ||
+                document.getElementById('grade2').value === '' ||
+                document.getElementById('grade3').value === '') {
+                alert('Preencha todas as notas');
+                return;
+            }
+
+            const average = (grade1 + grade2 + grade3) / 3;
+            const averageFixed = average.toFixed(2);
+
+            studentInfo.textContent = studentName;
+            averageInfo.textContent = `Média: ${averageFixed}`;
+
+            result.classList.remove('hidden', 'aprovado', 'exame', 'reprovado');
+
+            if (average >= 7) {
+                statusInfo.textContent = '✓ Aprovado';
+                result.classList.add('aprovado');
+            } else if (average >= 4) {
+                const neededForTen = (10 - average).toFixed(2);
+                statusInfo.textContent = `Exame — faltam ${neededForTen} pontos para 10`;
+                result.classList.add('exame');
+            } else {
+                statusInfo.textContent = '✗ Reprovado';
+                result.classList.add('reprovado');
+            }
+        });
+    </script>
+</body>
+</html>

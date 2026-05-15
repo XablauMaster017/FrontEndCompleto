@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 05 — Lista de Convidados VIP</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --bg-alt: #0a0c12;
+            --surface: #171923;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --text: #e4e6eb;
+            --text-dim: #9ca3af;
+            --text-faint: #6b7280;
+            --accent: #7c5cff;
+            --accent-hover: #6b4fea;
+            --accent-glow: rgba(124, 92, 255, 0.28);
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --radius: 14px;
+            --radius-sm: 9px;
+            --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 92, 255, 0.12) 0%, transparent 60%),
+                var(--bg);
+            color: var(--text);
+            padding: 28px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav {
+            width: 100%;
+            max-width: 560px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 13px;
+        }
+
+        .nav a, .nav span.disabled {
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+        }
+
+        .nav span.disabled { opacity: 0.35; cursor: not-allowed; }
+        .nav-arrows { display: flex; gap: 8px; }
+
+        .card {
+            width: 100%;
+            max-width: 560px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.04) inset,
+                0 30px 60px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 13px 18px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .dot { width: 11px; height: 11px; border-radius: 50%; }
+        .dot:nth-child(1) { background: #ff5f57; }
+        .dot:nth-child(2) { background: #febc2e; }
+        .dot:nth-child(3) { background: #28c840; }
+
+        .badge {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .card-body { padding: 30px 32px 32px; }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 4px;
+        }
+
+        .subtitle { font-size: 13px; color: var(--text-dim); }
+
+        .divider-line {
+            width: 38px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 2px;
+            margin: 14px 0 28px;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-faint);
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 14px;
+            background: var(--bg-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        input::placeholder { color: var(--text-faint); }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        button {
+            padding: 12px 22px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px -6px var(--accent-glow);
+        }
+
+        button:active { transform: translateY(0); }
+
+        .guest-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        .guest-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 4px;
+            border-bottom: 1px solid var(--border);
+            animation: fadeIn 240ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .guest-item:last-child { border-bottom: none; }
+
+        .guest-name {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .guest-name.arrived {
+            text-decoration: line-through;
+            color: var(--text-faint);
+        }
+
+        .guest-actions { display: flex; gap: 6px; }
+
+        .btn-sm {
+            padding: 6px 11px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 7px;
+            border: 1px solid var(--border);
+            background: var(--bg-alt);
+            color: var(--text-dim);
+        }
+
+        .btn-sm:hover { transform: translateY(-1px); box-shadow: none; }
+        .btn-done:hover   { color: var(--success); border-color: var(--success); background: var(--bg-alt); }
+        .btn-edit:hover   { color: var(--warning); border-color: var(--warning); background: var(--bg-alt); }
+        .btn-delete:hover { color: var(--danger);  border-color: var(--danger);  background: var(--bg-alt); }
+
+        .empty-state {
+            margin-top: 24px;
+            padding: 26px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-faint);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .counter {
+            margin-top: 18px;
+            font-size: 12px;
+            color: var(--text-dim);
+            text-align: right;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="00-instrucoes.html">← Instruções</a>
+        <div class="nav-arrows">
+            <a href="exc04.html">◀ Anterior</a>
+            <a href="exc06.html">Próximo ▶</a>
+        </div>
+    </nav>
+
+    <main class="card">
+        <div class="card-header">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="badge">Exercício 05</span>
+        </div>
+
+        <div class="card-body">
+            <h1>Lista de Convidados VIP</h1>
+            <p class="subtitle">Gerencie a entrada de convidados do evento Infinity Bank.</p>
+            <div class="divider-line"></div>
+
+            <label for="guestInput">Nome do Convidado</label>
+            <div class="form-group">
+                <input type="text" id="guestInput" placeholder="Digite o nome e pressione Adicionar" autocomplete="off">
+                <button id="addBtn">Adicionar</button>
+            </div>
+
+            <ul id="guestList" class="guest-list"></ul>
+            <div id="emptyState" class="empty-state">Nenhum convidado na lista ainda.</div>
+            <div id="counter" class="counter"></div>
+        </div>
+    </main>
+
+    <script>
+        // --- Referências aos elementos do DOM ---
+        const guestInput = document.getElementById('guestInput');
+        const addBtn = document.getElementById('addBtn');
+        const guestList = document.getElementById('guestList');
+        const emptyState = document.getElementById('emptyState');
+        const counter = document.getElementById('counter');
+
+        // --- Array que guarda o "estado" da aplicação ---
+        // Cada convidado é um objeto: { name: "...", arrived: false }
+        let guests = [];
+
+        // --- Função que redesenha a lista inteira na tela ---
+        function render() {
+            guestList.innerHTML = ''; // limpa a lista antes de reconstruir
+
+            guests.forEach(function (guest, index) {
+                // <li> que representa um convidado
+                const li = document.createElement('li');
+                li.className = 'guest-item';
+
+                // Nome do convidado
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'guest-name' + (guest.arrived ? ' arrived' : '');
+                nameSpan.textContent = guest.name;
+
+                // Container dos botões
+                const actions = document.createElement('div');
+                actions.className = 'guest-actions';
+
+                // Botão CONCLUIR — marca presença (risca o nome)
+                const doneBtn = document.createElement('button');
+                doneBtn.className = 'btn-sm btn-done';
+                doneBtn.textContent = guest.arrived ? 'Reverter' : 'Concluir';
+                doneBtn.addEventListener('click', function () {
+                    guests[index].arrived = !guests[index].arrived; // alterna true/false
+                    render();
+                });
+
+                // Botão EDITAR — usa prompt() para receber o novo nome
+                const editBtn = document.createElement('button');
+                editBtn.className = 'btn-sm btn-edit';
+                editBtn.textContent = 'Editar';
+                editBtn.addEventListener('click', function () {
+                    const newName = prompt('Editar nome do convidado:', guest.name);
+                    if (newName !== null && newName.trim() !== '') {
+                        guests[index].name = newName.trim();
+                        render();
+                    }
+                });
+
+                // Botão EXCLUIR — remove o convidado do array
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn-sm btn-delete';
+                deleteBtn.textContent = 'Excluir';
+                deleteBtn.addEventListener('click', function () {
+                    guests.splice(index, 1); // remove 1 item na posição "index"
+                    render();
+                });
+
+                actions.appendChild(doneBtn);
+                actions.appendChild(editBtn);
+                actions.appendChild(deleteBtn);
+
+                li.appendChild(nameSpan);
+                li.appendChild(actions);
+                guestList.appendChild(li);
+            });
+
+            // Mostra/esconde o estado vazio e atualiza o contador
+            if (guests.length === 0) {
+                emptyState.style.display = 'block';
+                counter.textContent = '';
+            } else {
+                emptyState.style.display = 'none';
+                const arrived = guests.filter(function (g) { return g.arrived; }).length;
+                counter.textContent = arrived + ' de ' + guests.length + ' convidado(s) presente(s)';
+            }
+        }
+
+        // --- Função que adiciona um novo convidado ---
+        function addGuest() {
+            const name = guestInput.value.trim(); // .trim() evita nomes vazios/só espaços
+            if (name === '') {
+                alert('Digite um nome válido.');
+                return;
+            }
+            guests.push({ name: name, arrived: false });
+            guestInput.value = '';   // limpa o campo
+            guestInput.focus();      // devolve o foco para digitar o próximo
+            render();
+        }
+
+        // --- Eventos ---
+        addBtn.addEventListener('click', addGuest);
+        guestInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') addGuest();
+        });
+
+        // Primeira renderização (lista vazia)
+        render();
+    </script>
+</body>
+</html>
