@@ -1,0 +1,22 @@
+node_modules
+.next
+out
+build
+dist
+.env*.local
+.DS_Store
+*.log
+.vercel
+.idea
+.vscode
+
+.vercel
+
+# Guia de estudos pessoal — não versionar (atualizado conforme o projeto evolui)
+Study/
+
+# Roadmap detalhado do produto — estratégico, não versionar
+app/roadmap/
+
+# Documentos estratégicos internos — não versionar
+PRECIFICACAO.md

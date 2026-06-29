@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink:        #0E1A2E;
+  --ink-700:    #182640;
+  --ink-500:    #2A3753;
+  --slate:      #6B7186;
+  --sand:       #D2CCBE;
+  --paper:      #F6F3EC;
+  --paper-50:   #FBF9F4;
+  --midnight:   #060B1A;
+  --amber:      #FF6B3D;
+  --amber-soft: #FFD7C5;
+  --success:    #1F8A5B;
+  --warning:    #E0A93C;
+  --critical:   #D9484A;
+  --info:       #3D6FA8;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+section + section {
+  scroll-margin-top: 80px;
+}
+
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-summary .faq-icon::before { content: '+'; }
+details[open] .faq-summary .faq-icon::before { content: '−'; }
+
+.milestone-row {
+  border-left: 2px solid transparent;
+  background-color: transparent;
+  transition: background-color 0.3s ease, border-left-color 0.3s ease, transform 0.3s ease, padding-left 0.3s ease;
+}
+.milestone-row:hover {
+  background-color: rgba(255, 215, 197, 0.28);
+  border-left-color: var(--amber);
+  transform: translateX(2px);
+  padding-left: 8px;
+}
+.milestone-row .milestone-divider {
+  transition: background-color 0.3s ease;
+}
+.milestone-row:hover .milestone-divider {
+  background-color: var(--amber);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--midnight);
+}
+
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up { animation: none; }
+}

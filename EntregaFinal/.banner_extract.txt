@@ -1,0 +1,69 @@
+Slides: 1
+Slide size: 35.44 x 47.25 in
+
+=== Slide 1 (layout: Slide de título) ===
+  Retângulo 1 @ (-0.03,-0.05) 35.44x5.96in
+  AutoShape 2 @ (0.17,-1.42) 0.33x0.33in
+  AutoShape 4 @ (0.34,-1.25) 0.33x0.33in
+  AutoShape 6 @ (0.50,-1.08) 0.33x0.33in
+  Retângulo 21 @ (-0.08,45.67) 35.52x1.58in
+          ENGENHARIA DE SOFTWARE
+  Retângulo 22 @ (17.85,22.21) 16.14x1.26in
+      MODELO DE NEGÓCIO CANVAS
+  CaixaDeTexto 11 @ (1.05,17.08) 16.22x6.77in
+      Segmento Foco: Empresas brasileiras que necessitam realizar cálculo e a gestão de tributos de forma segura e eficiente, especialmente aquelas impactadas pela reforma tributária 
+      Perfil do Decisor: -Proprietários de MEIs e pequenas empresas. -Gestores financeiros e administrativos. -Contadores. -Diretores financeiros
+      Necessidades Críticas: -Compreender a nova Reforma Tributária. -Evitar multas e autuações fiscais. -Reduzir tempo gasto com burocracia tributária
+  Retângulo 28 @ (1.02,32.92) 16.14x1.26in
+      PRODUTOS E/OU SERVIÇOS
+  Retângulo 29 @ (1.13,23.57) 16.14x1.26in
+      OBJETIVOS DO EMPREENDIMENTO
+  CaixaDeTexto 30 @ (1.10,23.57) 16.14x13.03in
+      Temos como objetivo entregar segurança, inteligência fiscal, apoio a sua empresa no pré, durante e pós-reforma tributária, simplicidade sobre o sistema tributário mais complexo do mundo, e atualização constante sobre a reforma. Deixando sua empresa com mais competitividade no mercado e, aumentando a produtividade e resultados da sua empresa.
+      Outro objetivo nosso e, também sendo um diferencial é ter uma solução / plataforma com foco total na reforma tributária, criada a partir da reforma e não improvisada ou implementada as presas e, de forma genérica ou tendo a reforma como algum secundário 
+  CaixaDeTexto 31 @ (17.85,23.62) 16.17x13.03in
+  Retângulo 32 @ (17.85,37.28) 16.34x1.15in
+      Considerações Finais
+  CaixaDeTexto 33 @ (17.88,38.60) 16.34x11.41in
+       A SmarTax é uma solução para um dos maiores problemas enfrentados por empresas brasileiras: a complexidade tributária. E com a chegada da nova reforma, essas empresas terão que se adaptar a essas novas regras, aumentando ainda mais a complexidade.
+       Com cálculos automáticos de impostos e atualização em tempo real da legislação, nossa empresa oferece segurança, praticidade. Além de reduzir custos e erros, a plataforma permite que empreendedores foquem no crescimento de seus negócios.
+       Dessa forma, o SmartTax não é apenas uma ferramenta de gestão fiscal, mas uma ferramenta de modernização na relação entre empresas e o sistema tributário brasileiro, tornando um ambiente de negócios mais seguro, eficiente e competitivo.
+        
+  Retângulo 41 @ (1.10,6.14) 16.14x1.26in
+      RESUMO & PROBLEMA
+  AutoShape 2 @ (0.17,-0.16) 0.33x0.33in
+  AutoShape 4 @ (0.34,0.01) 0.33x0.33in
+  CaixaDeTexto 23 @ (1.02,34.33) 16.14x10.87in
+  CaixaDeTexto 25 @ (1.10,7.58) 16.14x7.10in
+      Nossa proposta é criar uma plataforma que calcula impostos e prevê os impactos da reforma tributária no seu negócio. O objetivo é mitigar problemas futuros trazidos por essa transição, como a desinformação e a complexidade dos novos cálculos, ajudando a reduzir o total de impostos pagos pela sua empresa.
+  Retângulo 37 @ (1.10,15.68) 16.14x1.26in
+      PÚBLICO-ALVO
+  Imagem 10 @ (1.18,18.26) 0.47x0.48in
+  Imagem 12 @ (1.18,21.95) 0.47x0.48in
+  Imagem 13 @ (1.18,20.47) 0.47x0.48in
+  Gráfico 16 @ (2.53,15.63) 1.44x1.44in
+  Gráfico 40 @ (2.12,32.97) 1.20x1.20in
+  Gráfico 47 @ (19.71,37.43) 1.00x1.00in
+  CaixaDeTexto 48 @ (26.20,0.54) 7.83x4.39in
+      Logotipo
+      da Empresa
+  Retângulo 51 @ (17.88,6.14) 16.14x1.26in
+      Cenário Competitivo & Soluções Atuais
+  CaixaDeTexto 52 @ (17.88,7.56) 16.14x5.49in
+      Conta Azul
+      Totvs
+      Escritórios contábeis
+  Gráfico 54 @ (18.35,22.34) 1.00x1.00in
+  Retângulo 58 @ (17.89,12.42) 16.14x1.28in
+      MVP & CANAIS DE ACESSO
+  CaixaDeTexto 59 @ (17.92,13.74) 16.14x8.21in
+      Espaço para prints do seu Wireframe e QRCodes dos links reais da sua Landing Page e do seu Protótipo Interativo.
+  Gráfico 61 @ (19.02,12.27) 1.39x1.39in
+  Imagem 35 @ (28.26,45.92) 5.99x1.09in
+  Retângulo 39 @ (1.02,0.56) 24.96x4.39in
+  CaixaDeTexto 24 @ (-1.47,0.72) 29.96x1.58in
+      MENTALIDADE CRIATIVA E EMPREENDEDORA
+  CaixaDeTexto 6 @ (1.13,2.74) 24.82x1.28in
+      Acadêmicos: Samuel Hungaro da Silva; Felipe Guiráo da Silva; Victor de Souza Vicente; Bruno Fernandes Ortega; Nome 5 
+      Professor: Leandro Matheus Fogate
+  Imagem 7 @ (17.87,23.56) 16.13x13.08in

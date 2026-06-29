@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copa do Mundo 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f4f8;
+            font-size: 16px;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px 20px;
+        }
+
+        header h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            color: #85c1e9;
+        }
+
+        main {
+            max-width: 860px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .secao {
+            background-color: #e8f4fd;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .secao h2 {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .secao p {
+            font-size: 0.95em;
+            line-height: 1.8;
+            text-align: justify;
+            color: #444;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 25px 0 40px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 28px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Copa do Mundo 2026</h1>
+        <nav>
+            <a href="#organizacao">Organização e Sedes</a>
+            <a href="#formato">Novo Formato</a>
+            <a href="#expectativas">Expectativas e Impacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="organizacao" class="secao">
+            <h2>🌍 Organização e Sedes</h2>
+            <p>
+                A Copa do Mundo FIFA de 2026 será a primeira edição realizada em três países:
+                Estados Unidos, Canadá e México. Essa será também a maior Copa da história
+                em número de cidades-sede, com partidas distribuídas por diversas regiões
+                da América do Norte, ampliando o alcance global do torneio.
+            </p>
+        </section>
+
+        <section id="formato" class="secao">
+            <h2>⚽ Novo Formato</h2>
+            <p>
+                O torneio contará com 48 seleções, em vez das tradicionais 32. As equipes
+                serão divididas em grupos, aumentando o número total de jogos e dando mais
+                oportunidades para países de diferentes continentes participarem. Essa mudança
+                foi promovida pela FIFA para tornar a competição mais inclusiva e competitiva.
+            </p>
+        </section>
+
+        <section id="expectativas" class="secao">
+            <h2>🏆 Expectativas e Impacto</h2>
+            <p>
+                A edição de 2026 promete ser uma das mais assistidas da história, com grande
+                impacto econômico e cultural nos países-sede. Além disso, seleções tradicionais
+                e emergentes devem protagonizar jogos de alto nível, aumentando ainda mais o
+                interesse global pelo futebol e fortalecendo o esporte em novas regiões.
+            </p>
+        </section>
+    </main>
+
+    <div class="btn-container">
+        <button onclick="mostrarTabela()">Mostrar Tabela de Jogos</button>
+    </div>
+
+    <script>
+        function mostrarTabela() {
+            var img = document.createElement('img');
+            img.src = 'img/tabela_jogos.jpg';
+            img.alt = 'Tabela de Jogos - Copa do Mundo 2026';
+            img.style.maxWidth = '100%';
+            document.body.appendChild(img);
+        }
+    </script>
+
+</body>
+</html>
